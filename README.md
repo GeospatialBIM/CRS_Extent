@@ -29,7 +29,7 @@ For each BIM file, the report includes:
 
 ## Requirements
 
-- **ArcGIS Pro** (3.x recommended)
+- **ArcGIS Pro** (3.6 recommended)
 - **Python 3.x** (installed with ArcGIS Pro)
 - **ArcPy** (comes with ArcGIS Pro)
 - Read access to the folder containing BIM files (`.rvt`, `.ifc`)
