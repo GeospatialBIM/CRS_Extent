@@ -49,6 +49,7 @@ for dirpath, dirnames, filenames in os.walk(workspace):
                                     if ext.spatialReference else None
                                 )
                             }
+
                         break  # stop once ExteriorShell is found
 
         # ---- GEOREFERENCE STATUS (MUST BE PER FILE) ----
@@ -68,6 +69,7 @@ for dirpath, dirnames, filenames in os.walk(workspace):
         results.append({
             "Name": desc.name,
             "DataType": desc.dataType,
+            "DisplayUnits": getattr(desc, "lengthDisplayUnit", None),
             "ExteriorShellExtent": exterior_extent,
             "GeoreferenceStatus": geo_status
         })
@@ -157,6 +159,7 @@ def format_results(results):
         "ExteriorShell Extent (YMax)",
         "ExteriorShell Extent (ZMin)",
         "ExteriorShell Extent (ZMax)",
+        "DisplayUnits",
     ]
 
     for item in results:
@@ -173,6 +176,7 @@ def format_results(results):
             "ExteriorShell Extent (YMax)": extent.get("YMax"),
             "ExteriorShell Extent (ZMin)": extent.get("ZMin"),
             "ExteriorShell Extent (ZMax)": extent.get("ZMax"),
+            "DisplayUnits" : item.get("DisplayUnits"),
         }
 
         lines.append("-" * 80)
