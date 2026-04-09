@@ -58,6 +58,9 @@ No third‑party Python packages are required.
 - ✅ Output options:
   - Console report
   - Optional text (`.txt`) report
+- ✅ Separate reports:
+  - **FULL BIM Report** (all files)
+  - **UN‑GEOREFERENCED ONLY Report**
 - ✅ Designed for **ArcGIS Pro Notebook** execution
 - ✅ Vendor‑neutral and standards‑focused
 
@@ -106,6 +109,29 @@ This option is recommended for repeated use or distribution to non‑developers.
 - Supporting infrastructure and AEC GIS workflows
 
 ---
+
+## 📑 Generated Reports
+
+This script can generate **two separate text files**:
+
+### 1️⃣ Full BIM Report  
+Includes **all detected BIM files**.
+
+Default:
+```
+BIM_Report_.txt
+```
+
+### 2️⃣ Un‑Georeferenced BIM Report  
+Includes **only files flagged as UN‑GEOREFERENCED**.
+
+Default:
+```
+BIM_UnGeoreferenced_Report_.txt
+```
+
+The un‑georeferenced report is offered **only if applicable files exist**.
+****
 
 ## 📝 Text Output Behavior
 
