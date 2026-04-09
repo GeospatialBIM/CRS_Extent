@@ -20,7 +20,9 @@ For each BIM file, the report includes:
 - ExteriorShell model extents (X, Y, Z)
 - A summary section highlighting un‑georeferenced models
 - A timestamp and disclaimer clarifying data responsibility
-- Display units (model)
+- Display Unit System
+- Length Display Unit
+- Model Length Unit 
 
 > **Important**  
 > The report reflects only the spatial reference and extent information recorded in the BIM file.  
@@ -38,6 +40,39 @@ For each BIM file, the report includes:
 No third‑party Python packages are required.
 
 ---
+## 🚀 Key Features
+
+- ✅ Recursively scans a workspace folder for:
+  - Autodesk Revit files (`.rvt`)
+  - IFC files (`.ifc`)
+- ✅ Reports **per BIM file**:
+  - CRS name
+  - EPSG code (when available)
+  - Spatial extent:
+    - XMin
+    - YMin
+    - XMax
+    - YMax
+  - Georeferencing status
+  - **IFC length unit** (IFC only)
+- ✅ Output options:
+  - Console report
+  - Optional text (`.txt`) report
+- ✅ Designed for **ArcGIS Pro Notebook** execution
+- ✅ Vendor‑neutral and standards‑focused
+
+---
+
+## 📂 Supported File Types
+
+| File Type | Supported | Notes |
+|----------|----------|------|
+| `.rvt` | ✅ | CRS & spatial extent only |
+| `.ifc` | ✅ | CRS, extent, **length unit extracted** |
+| Other | ❌ | Ignored |
+
+---
+
 
 ## Usage
 
@@ -72,9 +107,49 @@ This option is recommended for repeated use or distribution to non‑developers.
 
 ---
 
-## Disclaimer
+## 📝 Text Output Behavior
+
+- Default output filename:
+  ```
+  BIM_Report_.txt
+  ```
+- The user may:
+  - Accept the default location
+  - Specify a custom path
+- The script will:
+  - Attempt to create directories if missing
+  - Warn the user if file permissions prevent saving
+
+---
+
+## 📏 IFC Length Unit Reporting
+
+- Length units are extracted **only for IFC files**
+- Detection is based on parsing readable IFC text
+- Typical reported values:
+  - `METERS`
+  - `MILLIMETERS`
+  - `FEET`
+- For Revit models:
+  ```
+  Length Unit: N/A
+  ```
+
+---
+
+## ⚠️ Important Disclaimer
 
 The report only displays the spatial reference and extent information recorded in the BIM file.  
 It does **not** validate whether the georeferenced data aligns correctly with the intended real‑world project location.  
 Ensuring correct georeferencing remains the responsibility of the data provider or vendor.
-``
+
+> **This tool performs metadata‑level validation only.**
+
+- It does **not** verify real‑world spatial accuracy
+- CRS values may exist but be incorrectly assigned
+- Spatial extents may fall outside valid CRS bounds
+- IFC parsing depends on accessible text content
+
+⚠️ **Results should always be validated against project control, survey data, and authoritative GIS references.**
+
+This script must **not** be used as a substitute for professional surveying or engineering review.
