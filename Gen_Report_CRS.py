@@ -69,6 +69,7 @@ for dirpath, dirnames, filenames in os.walk(workspace):
                             fc_desc = arcpy.Describe(fc_path)
                             ext = fc_desc.extent
 
+                            sr_obj = ext.spatialReference
                             exterior_extent = {
                                 "XMin": ext.XMin,
                                 "YMin": ext.YMin,
@@ -77,10 +78,11 @@ for dirpath, dirnames, filenames in os.walk(workspace):
                                 "ZMin": ext.ZMin,
                                 "ZMax": ext.ZMax,
                                 "SpatialReference": (
-                                    ext.spatialReference.name
-                                    if ext.spatialReference else None
+                                    sr_obj.name if sr_obj else None
                                 )
                             }
+
+                            epsg_code = sr_obj.factoryCode if sr_obj else None
 
                         break  # stop once ExteriorShell is found
 
@@ -112,7 +114,8 @@ for dirpath, dirnames, filenames in os.walk(workspace):
             "DisplayUnitSystem": getattr(desc, "displayUnitSystem", None),
             "ExteriorShellExtent": exterior_extent,
             "GeoreferenceStatus": geo_status,
-            "LengthUnit": length_unit
+            "LengthUnit": length_unit,
+            "EPSG Code" :epsg_code
         })
 
 # ------------------------------------------------------------------
@@ -149,6 +152,7 @@ REPORT_HEADERS = [
     "Georeference Status",
     "Reason",
     "SpatialReference",
+    "EPSG Code",
     "ExteriorShell Extent (XMin)",
     "ExteriorShell Extent (YMin)",
     "ExteriorShell Extent (XMax)",
@@ -179,6 +183,7 @@ def build_row_values(item):
         "Georeference Status"           : geo_status,
         "Reason"                        : reason,
         "SpatialReference"              : extent.get("SpatialReference"),
+        "EPSG Code"                     : item.get("EPSG Code"),
         "ExteriorShell Extent (XMin)"   : extent.get("XMin"),
         "ExteriorShell Extent (YMin)"   : extent.get("YMin"),
         "ExteriorShell Extent (XMax)"   : extent.get("XMax"),
