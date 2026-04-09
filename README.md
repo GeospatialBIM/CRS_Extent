@@ -17,6 +17,7 @@ For each BIM file, the report includes:
 - BIM data type (Revit / IFC)
 - Georeferencing status (Georeferenced vs. Un‑Georeferenced)
 - Recorded spatial reference (CRS)
+- EPSG Code
 - ExteriorShell model extents (X, Y, Z)
 - A summary section highlighting un‑georeferenced models
 - A timestamp and disclaimer clarifying data responsibility
